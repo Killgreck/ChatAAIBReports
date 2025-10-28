@@ -1,0 +1,8 @@
+numpy
+pandas
+openai
+faiss-cpu
+tiktoken
+pypdf
+tqdm
+pyarrow
