@@ -12,13 +12,6 @@ El flujo de trabajo es el siguiente:
 2.  **Búsqueda:** Cuando se realiza una pregunta, esta también se convierte en un embedding. El sistema busca en el índice vectorial los chunks de texto cuyos embeddings sean más similares al embedding de la pregunta.
 3.  **Generación:** Los chunks recuperados se combinan para formar un contexto. Este contexto, junto con la pregunta original, se envía a un modelo de lenguaje generativo (como GPT-4), que genera una respuesta coherente y basada en la información proporcionada.
 
-### Justificación de la Configuración
-
-*   **Azure OpenAI:** Se eligió por su robustez, seguridad y escalabilidad, siendo una opción ideal para aplicaciones empresariales.
-*   **FAISS (Facebook AI Similarity Search):** Es una biblioteca altamente optimizada para la búsqueda de similitud en vectores. Es extremadamente rápida, lo que es crucial para aplicaciones en tiempo real.
-*   **Modelo de Embeddings (`text-embedding-3-small`):** Ofrece un excelente equilibrio entre rendimiento y costo, generando embeddings de alta calidad.
-*   **Modelo de Chat (`gpt-4.1-nano`):** Es un modelo potente y eficiente, capaz de generar respuestas coherentes y precisas a partir del contexto proporcionado.
-
 ## Configuración del Proyecto
 
 ### Prerrequisitos
@@ -91,14 +84,5 @@ A continuación se detalla la configuración de cada modelo:
     *   **Solapamiento (Overlap):** `50` tokens
     *   **Descripción:** Este modelo utiliza la misma estrategia de chunking que el `baseline`, pero introduce un mecanismo de **Relevancia Marginal Máxima (MMR)** en la fase de recuperación. MMR busca diversificar los resultados de la búsqueda, seleccionando no solo los chunks más relevantes para la pregunta, sino también aquellos que aportan información nueva y diferente entre sí. Esto ayuda a evitar un contexto redundante y puede conducir a respuestas más completas y variadas.
 
-Puedes evaluar el rendimiento de cada modelo utilizando el script `evaluate.py`. Este script utiliza un pequeño conjunto de datos de ejemplo para calcular el `recall@k`.
 
-```bash
-python evaluate.py --model baseline
-```
-
-Para evaluar otro modelo, simplemente cambia el nombre del modelo:
-
-```bash
-python evaluate.py --model model_4_mmr
-```
+Proximamente de forma experiemtal chunks en imagenes 
