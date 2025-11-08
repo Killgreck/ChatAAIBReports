@@ -90,7 +90,7 @@ def search(query: str, k: int, embedding_deployment: str, use_mmr: bool = False,
     else:
         # Lógica de MMR
         candidate_indices = I[0]
-        candidate_embeddings = np.array([index.reconstruct(i) for i in candidate_indices])
+        candidate_embeddings = np.array([index.reconstruct(int(i)) for i in candidate_indices])
         faiss.normalize_L2(candidate_embeddings)
 
         query_similarities = np.dot(candidate_embeddings, query_embedding.T).flatten()

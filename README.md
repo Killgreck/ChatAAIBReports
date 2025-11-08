@@ -67,11 +67,29 @@ El sistema imprimirá la respuesta generada por el modelo de lenguaje.
 
 ### 3. Evaluación de Modelos
 
-Este proyecto incluye cuatro modelos preconfigurados en `config.json`:
+Este proyecto incluye cuatro modelos preconfigurados en `config.json`. Cada modelo utiliza una estrategia de segmentación (chunking) o recuperación de información ligeramente diferente, lo que permite comparar su impacto en la calidad de las respuestas.
 
-*   `baseline`: El modelo base.
-*   `model_2` y `model_3`: Modelos con diferentes estrategias de chunking.
-*   `model_4_mmr`: Un modelo que utiliza Relevancia Marginal Máxima (MMR) para reducir la redundancia en los resultados de búsqueda.
+A continuación se detalla la configuración de cada modelo:
+
+*   **`baseline` (Modelo Base)**
+    *   **Tamaño de Chunk (Chunk Size):** `320` tokens
+    *   **Solapamiento (Overlap):** `50` tokens
+    *   **Descripción:** Este es el modelo de referencia. Utiliza un tamaño de chunk moderado, que busca capturar suficiente contexto en cada fragmento sin ser excesivamente grande. El solapamiento ayuda a mantener la coherencia entre chunks consecutivos.
+
+*   **`model_2` (Chunks Grandes)**
+    *   **Tamaño de Chunk (Chunk Size):** `512` tokens
+    *   **Solapamiento (Overlap):** `50` tokens
+    *   **Descripción:** Este modelo utiliza chunks más grandes. La hipótesis es que fragmentos de mayor tamaño pueden capturar un contexto más amplio y complejo, lo que podría ser beneficioso para preguntas que requieren una comprensión más holística de los documentos.
+
+*   **`model_3` (Chunks Pequeños)**
+    *   **Tamaño de Chunk (Chunk Size):** `256` tokens
+    *   **Solapamiento (Overlap):** `25` tokens
+    *   **Descripción:** Este modelo utiliza chunks más pequeños y un solapamiento reducido. La idea es que fragmentos más pequeños y específicos pueden ser más efectivos para recuperar información muy puntual y precisa.
+
+*   **`model_4_mmr` (Reducción de Redundancia con MMR)**
+    *   **Tamaño de Chunk (Chunk Size):** `320` tokens
+    *   **Solapamiento (Overlap):** `50` tokens
+    *   **Descripción:** Este modelo utiliza la misma estrategia de chunking que el `baseline`, pero introduce un mecanismo de **Relevancia Marginal Máxima (MMR)** en la fase de recuperación. MMR busca diversificar los resultados de la búsqueda, seleccionando no solo los chunks más relevantes para la pregunta, sino también aquellos que aportan información nueva y diferente entre sí. Esto ayuda a evitar un contexto redundante y puede conducir a respuestas más completas y variadas.
 
 Puedes evaluar el rendimiento de cada modelo utilizando el script `evaluate.py`. Este script utiliza un pequeño conjunto de datos de ejemplo para calcular el `recall@k`.
 
