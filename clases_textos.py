@@ -56,7 +56,6 @@ def collect_files(input_dir: str) -> List[str]:
         files.extend(glob.glob(str(Path(input_dir) / pat), recursive=True))
     # quitar duplicados y ordenar
     files = sorted(list(set(files)))
-    files=['./documentos/'+fi.split('\\')[1] for fi in files]
     return files
 
 def extract_text_by_ext(path: str) -> str:

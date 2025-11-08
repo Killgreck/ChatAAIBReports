@@ -1,0 +1,32 @@
+{
+    "baseline": {
+        "chunk_size": 320,
+        "overlap": 50,
+        "k": 10,
+        "embedding_deployment": "text-embedding-3-small",
+        "chat_deployment": "gpt-4.1-nano"
+    },
+    "model_2": {
+        "chunk_size": 512,
+        "overlap": 50,
+        "k": 10,
+        "embedding_deployment": "text-embedding-3-small",
+        "chat_deployment": "gpt-4.1-nano"
+    },
+    "model_3": {
+        "chunk_size": 256,
+        "overlap": 25,
+        "k": 10,
+        "embedding_deployment": "text-embedding-3-small",
+        "chat_deployment": "gpt-4.1-nano"
+    },
+    "model_4_mmr": {
+        "chunk_size": 320,
+        "overlap": 50,
+        "k": 10,
+        "embedding_deployment": "text-embedding-3-small",
+        "chat_deployment": "gpt-4.1-nano",
+        "use_mmr": true,
+        "lambda": 0.5
+    }
+}
